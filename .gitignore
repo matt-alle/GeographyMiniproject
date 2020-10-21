@@ -1,5 +1,6 @@
-/bin
-/.settings
+/bin/
 /.classpath
 /.gitignore
 /.project
+/build.fxbuild
+/.settings
