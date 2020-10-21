@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Lalal extends Application {
+	
 	public static void main(String[] args) {
 		launch();
 	}
