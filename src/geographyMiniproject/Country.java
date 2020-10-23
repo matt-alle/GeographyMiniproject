@@ -12,9 +12,9 @@ public class Country extends GovernedRegion {
 		super(area, population, formOfGov);
 	}
 
-	// look at dis -> dafuq?
-	public int getArea(int area) {
-		int qq = super.getArea();
-		return qq;
+	@Override
+	public int getArea() {
+		return super.getArea();
 	}
+
 }

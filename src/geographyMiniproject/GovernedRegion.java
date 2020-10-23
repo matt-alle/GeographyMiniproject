@@ -11,7 +11,12 @@ public abstract class GovernedRegion {
 	private formOfGov formOfGov;
 
 	public GovernedRegion(int area, int population, formOfGov formOfGov) {
-		this.area = area;
+		if (area > 0 & area < 10000) {
+			this.area = area;
+		} else {
+			System.out.println("tresh area");
+			this.area = -9999;
+		}
 		this.population = population;
 		this.formOfGov = formOfGov;
 	}
@@ -20,6 +25,7 @@ public abstract class GovernedRegion {
 		return area;
 	}
 
+	// ev. no need for setters
 	public void setArea(int area) {
 		this.area = area;
 	}
