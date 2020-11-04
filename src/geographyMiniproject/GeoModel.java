@@ -10,8 +10,12 @@ public class GeoModel {
 		countries.add(country);
 		System.out.println("Actual list:");
 		for (int i = 0; i < countries.size(); i++) {
-			System.out.println("Area from list: " + countries.get(i).getArea());
+			System.out.println(countries.get(i).toString());
 		}
+	}
+
+	public ArrayList<Country> getCountries() {
+		return countries;
 	}
 
 }

@@ -11,12 +11,7 @@ public abstract class GovernedRegion {
 	private formOfGov formOfGov;
 
 	public GovernedRegion(int area, int population, formOfGov formOfGov) {
-		if (area > 0 & area < 10000) {
-			this.area = area;
-		} else {
-			System.out.println("tresh area");
-			this.area = -9999;
-		}
+		this.area = area;
 		this.population = population;
 		this.formOfGov = formOfGov;
 	}
