@@ -6,7 +6,7 @@ public class GeoModel {
 
 	private ArrayList<Country> countries = new ArrayList<>();
 
-	public void AddCountry(Country country) {
+	public void addCountry(Country country) {
 		countries.add(country);
 		System.out.println("Actual list:");
 		for (int i = 0; i < countries.size(); i++) {
@@ -14,8 +14,16 @@ public class GeoModel {
 		}
 	}
 
+	public void deleteCountry(int x) {
+		countries.remove(x);
+	}
+
 	public ArrayList<Country> getCountries() {
 		return countries;
+	}
+
+	public void addStateToCountry(Country country, State state) {
+		country.addState(state);
 	}
 
 }

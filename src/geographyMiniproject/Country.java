@@ -1,25 +1,31 @@
 package geographyMiniproject;
 
+import java.util.ArrayList;
+
 public class Country extends GovernedRegion {
 
 	private final int countryID;
 	private static int highestID = 0;
 	private String countryName;
-
-	public enum states {
-		Q, W, E, R
-	};
-
-	private states states; // not really? get from state class
+	private ArrayList<State> states = new ArrayList<>();
 
 	private static int getNextID() {
 		return highestID++;
 	}
 
-	public Country(String countryName, int area, int population, formOfGov formOfGov) {
+	public Country(String countryName, int area, int population, formOfGov formOfGov, ArrayList<State> states) {
 		super(area, population, formOfGov);
 		this.countryID = getNextID();
 		this.countryName = countryName;
+		this.states = states;
+	}
+
+	public void addState(State state) {
+		states.add(state);
+	}
+
+	public ArrayList<State> getStatesFromCountry() {
+		return states;
 	}
 
 	public String getCountryName() {

@@ -1,5 +1,9 @@
 package geographyMiniproject;
 
+import java.util.ArrayList;
+
+import geographyMiniproject.GovernedRegion.formOfGov;
+
 public class GeoController {
 	private GeoView view;
 	private GeoModel model;
@@ -8,14 +12,23 @@ public class GeoController {
 	private boolean areaValid;
 	private boolean populationValid;
 
+	private ArrayList<State> states;
+	private State state = new State("State1", 5, 5, formOfGov.A);
+
 	public GeoController(GeoModel model, GeoView view) {
 		this.model = model;
 		this.view = view;
 
 		view.saveButton.setOnAction((e) -> {
 			Country counrty = new Country(view.countryTF.getText(), Integer.valueOf(view.areaTF.getText()),
-					Integer.valueOf(view.populationTF.getText()), view.formOfGovBox.getValue());
-			model.AddCountry(counrty);
+					Integer.valueOf(view.populationTF.getText()), view.formOfGovBox.getValue(), states);
+
+			// Country country1 = new Country("dsfasd", 1, 1, formOfGov.A, states);
+			// model.addStateToCountry(country1, state);
+			// country1.addState(state);
+			// System.out.println(country1.getStatesFromCountry().size());
+
+			model.addCountry(counrty);
 			view.countryTF.clear();
 			view.areaTF.clear();
 			view.populationTF.clear();
@@ -23,9 +36,14 @@ public class GeoController {
 		});
 
 		view.selectButton.setOnAction((e) -> {
-			int x = view.countryBox.getSelectionModel().getSelectedIndex();
-			view.displayCountry.setText(model.getCountries().get(x).toString());
+			int countryPosition = view.countryBox.getSelectionModel().getSelectedIndex();
+			view.displayCountry.setText(model.getCountries().get(countryPosition).toString());
 		});
+
+		// view.deleteButton.setOnAction((e) -> {
+		// int countryPosition = view.countryBox.getSelectionModel().getSelectedIndex();
+		// model.deleteCountry(countryPosition);
+		// });
 
 		view.saveButton.setDisable(true);
 		view.countryTF.textProperty().addListener((observable, oldValue, newValue) -> validateInputCountry(newValue));
