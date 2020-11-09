@@ -21,6 +21,11 @@ public class GeoModel {
 	}
 
 	public void deleteCountry(int delPosition) {
+		for (int i = 0; i < states.size(); i++) {
+			if (countries.get(delPosition).getCountryName() == states.get(i).getBelongsToCountry()) {
+				states.remove(i);
+			}
+		}
 		countries.remove(delPosition);
 	}
 
@@ -38,6 +43,31 @@ public class GeoModel {
 
 	public ArrayList<State> getStates() {
 		return states;
+	}
+
+	public State getStateByName(String stateName) {
+		State foundState = null;
+		for (int i = 0; i <= states.size(); i++) {
+			if (states.get(i).getStateName() == stateName) {
+				foundState = states.get(i);
+			}
+		}
+		return foundState;
+	}
+
+	// Creates a list of all the states which belong to the selected Country
+	public String createDisplayListOfStates(int countryPosition) {
+		String stateList = "All States:" + "\n";
+		String selectedCountry = countries.get(countryPosition).getCountryName();
+		for (int i = 0; i < states.size(); i++) {
+			String countryOfState = states.get(i).getBelongsToCountry();
+			if (countryOfState == selectedCountry) {
+				String state = states.get(i).getStateName();
+				stateList += state;
+				stateList += "\n";
+			}
+		}
+		return stateList;
 	}
 
 	// Save/Read File

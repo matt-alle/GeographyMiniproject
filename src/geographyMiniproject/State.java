@@ -29,7 +29,9 @@ public class State extends GovernedRegion {
 	@Override
 	public String toString() {
 		String description;
-		description = this.stateName + " / " + super.getArea();
+		description = this.stateName + " (ID: " + this.stateID + ")" + "\nArea: " + super.getArea() + "\nPopulation: "
+				+ super.getPopulation() + "\nForm of Government: " + super.getFormOfGov();
+
 		return description;
 	}
 

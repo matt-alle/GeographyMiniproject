@@ -36,8 +36,8 @@ public class Country extends GovernedRegion {
 	@Override
 	public String toString() {
 		String description;
-		description = this.countryName + " (ID: " + this.countryID + ")" + "\n" + "Area: " + super.getArea()
-				+ " / Population: " + super.getPopulation() + "\n" + "Form of Government: " + super.getFormOfGov();
+		description = this.countryName + " (ID: " + this.countryID + ")" + "\nArea: " + super.getArea()
+				+ "\nPopulation: " + super.getPopulation() + "\nForm of Government: " + super.getFormOfGov();
 		return description;
 	}
 

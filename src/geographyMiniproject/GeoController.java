@@ -30,43 +30,57 @@ public class GeoController {
 			model.addState(state);
 			clearInputArea();
 			updateComboBoxState(countryPosition);
+			String stateList = model.createDisplayListOfStates(countryPosition);
+			view.displayStates.setText(stateList);
 		});
 
 		view.selectButton.setOnAction((e) -> {
 			if (view.countryBox.getSelectionModel().getSelectedIndex() >= 0) {
 				int countryPosition = view.countryBox.getSelectionModel().getSelectedIndex();
 				view.displayCountry.setText(model.getCountries().get(countryPosition).toString());
-				
-				//TODO -> put that in Model and display only States which belong to Country
-				String stateList = "All States:" + "\n";
-				for (int i = 0; i < model.getStates().size(); i++) {
-					String state = model.getStates().get(i).getStateName();
-					stateList += state;
-					stateList += "\n";
-				}
-				
+				String stateList = model.createDisplayListOfStates(countryPosition);
 				view.displayStates.setText(stateList);
-				view.deleteButton.setDisable(false); // Item must be selected before deleting is possible
+				view.deleteCountryButton.setDisable(false); // Item must be selected before deleting is possible
 				updateComboBoxState(countryPosition);
 			}
 		});
-		
+
+		// TODO: ERROR: always displays States of the first country / or does not work at all atm
 		view.selectStateButton.setOnAction((e) -> {
 			if (view.stateBox.getSelectionModel().getSelectedIndex() >= 0) {
-				int statePosition = view.stateBox.getSelectionModel().getSelectedIndex();
-				view.displayStates.setText(model.getStates().get(statePosition).toString());
+				// int statePosition = view.stateBox.getSelectionModel().getSelectedIndex();
+				String stateName = view.stateBox.getSelectionModel().getSelectedItem();
+			//	model.getStateByName(stateName);
+				view.displayStates.setText(model.getStateByName(stateName).toString());
+				view.deleteStateButton.setDisable(false);
 			}
 		});
 
-		view.deleteButton.setDisable(true);
-		view.deleteButton.setOnAction((e) -> {
+		view.deleteCountryButton.setDisable(true);
+		view.deleteCountryButton.setOnAction((e) -> {
 			int countryPosition = view.countryBox.getSelectionModel().getSelectedIndex();
-			model.deleteCountry(countryPosition);
+			model.deleteCountry(countryPosition); // Also deletes all States of the Country
 			updateComboBox();
+			view.stateBox.getItems().clear();
 			view.displayCountry.setText("--Deleted--");
-			view.deleteButton.setDisable(true);
+			view.displayStates.setText("--Deleted--");
+			view.deleteCountryButton.setDisable(true);
 			if (model.getCountries().size() < 1)
 				view.selectButton.setDisable(true);
+		});
+
+		// TODO:not working right - avoid repetition
+		view.deleteStateButton.setDisable(true);
+		view.deleteStateButton.setOnAction((e) -> {
+			int statePosition = view.stateBox.getSelectionModel().getSelectedIndex();
+			int countryPosition = view.countryBox.getSelectionModel().getSelectedIndex();
+			model.deleteCountry(statePosition); // Also deletes all States of the Country
+			updateComboBoxState(countryPosition);
+			view.stateBox.getItems().clear();
+			view.displayStates.setText("--Deleted--");
+			view.deleteStateButton.setDisable(true);
+			if (model.getStates().size() < 1)
+				view.selectStateButton.setDisable(true);
 		});
 
 		// TODO
@@ -81,7 +95,7 @@ public class GeoController {
 			model.setSaveFile(in);
 		});
 
-		//Input control - enable/disable buttons
+		// Input control - enable/disable buttons
 		view.saveButton.setDisable(true);
 		view.addStateButton.setDisable(true);
 		view.countryTF.textProperty().addListener((observable, oldValue, newValue) -> validateInputCountry(newValue));
@@ -176,7 +190,8 @@ public class GeoController {
 	}
 
 	private void enableDisableButtonState() {
-		boolean valid = stateValid && areaValid && populationValid;
+		boolean valid = stateValid && areaValid && populationValid && !countryValid; // doesn't work until sth in
+																						// "State" is changed again
 		view.addStateButton.setDisable(!valid);
 	}
 }
