@@ -16,7 +16,8 @@ public class GeoView {
 	private Stage stage;
 	private GeoModel model;
 
-	Label displayCountry = new Label("dispC");
+	Label displayCountry = new Label("Country");
+	Label displayStates = new Label("States");
 	Label stateLabel = new Label("State");
 	Label countryLabel = new Label("Country");
 	Label populationLabel = new Label("Population");
@@ -29,11 +30,14 @@ public class GeoView {
 	TextField areaTF = new TextField();
 
 	Button selectButton = new Button("Select");
+	Button selectStateButton = new Button("Select State");
 	Button saveButton = new Button("Save");
+	Button addStateButton = new Button("Add State to Country");
 	Button deleteButton = new Button("Delete");
 	Button updateButton = new Button("Update"); // not sure if needed
 
 	ComboBox<String> countryBox = new ComboBox<>();
+	ComboBox<String> stateBox = new ComboBox<>();
 	ComboBox<GovernedRegion.formOfGov> formOfGovBox = new ComboBox<>();
 
 	public GeoView(Stage stage, GeoModel model) {
@@ -56,7 +60,7 @@ public class GeoView {
 
 	private HBox dataSelection() {
 		HBox hBox = new HBox();
-		hBox.getChildren().addAll(countryBox, selectButton);
+		hBox.getChildren().addAll(countryBox, selectButton, stateBox, selectStateButton);
 		return hBox;
 	}
 
@@ -78,13 +82,16 @@ public class GeoView {
 
 	private HBox buttonArea() {
 		HBox hBox = new HBox();
-		hBox.getChildren().addAll(saveButton, deleteButton, updateButton);
+		hBox.getChildren().addAll(saveButton, addStateButton, deleteButton, updateButton);
 		return hBox;
 	}
 
 	private Pane displayArea() {
 		GridPane pane = new GridPane();
-		pane.getChildren().add(displayCountry);
+		pane.add(displayCountry, 0, 0);
+		displayCountry.setMinSize(200, 200);
+		pane.add(displayStates, 1, 0);
+		displayStates.setMinSize(200, 200);
 		return pane;
 	}
 

@@ -19,4 +19,9 @@ public class GeoMVC extends Application {
 		controller = new GeoController(model, view);
 		view.start();
 	}
+
+	@Override
+	public void stop() {
+		model.writeSaveFile();
+	}
 }
