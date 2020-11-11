@@ -1,7 +1,5 @@
 package geographyMiniproject;
 
-import java.util.ArrayList;
-
 public class Country extends GovernedRegion {
 
 	private final int countryID;

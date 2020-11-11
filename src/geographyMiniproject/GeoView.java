@@ -33,8 +33,6 @@ public class GeoView {
 	TextArea displayCountry = new TextArea();
 	TextArea displayStates = new TextArea();
 
-	Button selectButton = new Button("Select");
-	Button selectStateButton = new Button("Select State");
 	Button saveButton = new Button("Save Country");
 	Button addStateButton = new Button("Add State to Country");
 	Button deleteCountryButton = new Button("Delete Country");
@@ -66,12 +64,10 @@ public class GeoView {
 
 	private HBox dataSelection() {
 		HBox hBox = new HBox();
-		hBox.setSpacing(10);
+		hBox.setSpacing(50);
 		countryBox.setPrefSize(150, 25);
 		stateBox.setPrefSize(150, 25);
-		selectButton.setPrefSize(80, 25);
-		selectStateButton.setPrefSize(80, 25);
-		hBox.getChildren().addAll(countryBox, selectButton, stateBox, selectStateButton);
+		hBox.getChildren().addAll(countryBox, stateBox);
 		return hBox;
 	}
 

@@ -20,7 +20,6 @@ public abstract class GovernedRegion {
 		return area;
 	}
 
-	// ev. no need for setters
 	public void setArea(int area) {
 		this.area = area;
 	}

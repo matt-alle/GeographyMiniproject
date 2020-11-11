@@ -15,6 +15,7 @@ public class GeoModel {
 
 	private ArrayList<Country> countries = new ArrayList<>();
 	private ArrayList<State> states = new ArrayList<>();
+	private ArrayList<State> statesOfCountry = new ArrayList<>();
 
 	public void addCountry(Country country) {
 		countries.add(country);
@@ -37,22 +38,25 @@ public class GeoModel {
 		states.add(state);
 	}
 
-	public void deleteState(int delPosition) {
-		states.remove(delPosition);
+	public void deleteState(String stateName) {
+		for (int i = 0; i < states.size(); i++) {
+			if (states.get(i).getStateName() == stateName)
+				states.remove(i);
+		}
 	}
 
 	public ArrayList<State> getStates() {
 		return states;
 	}
 
-	public State getStateByName(String stateName) {
-		State foundState = null;
-		for (int i = 0; i <= states.size(); i++) {
-			if (states.get(i).getStateName() == stateName) {
-				foundState = states.get(i);
+	public ArrayList<State> getStatesOfCountry(String countryName) {
+		statesOfCountry.clear();
+		for (int i = 0; i < states.size(); i++) {
+			if (states.get(i).getBelongsToCountry() == countryName) {
+				statesOfCountry.add(states.get(i));
 			}
 		}
-		return foundState;
+		return statesOfCountry;
 	}
 
 	// Creates a list of all the states which belong to the selected Country
