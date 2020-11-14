@@ -30,7 +30,7 @@ public class State extends GovernedRegion {
 	public String toString() {
 		String description;
 		description = this.stateName + " (ID: " + this.stateID + ")" + "\nArea: " + super.getArea() + "\nPopulation: "
-				+ super.getPopulation() + "\nForm of Government: " + super.getFormOfGov() + "\nBelongs To: "
+				+ super.getPopulation() + "\nForm of Government: " + super.getFormOfGov() + "\nBelongs to: "
 				+ this.getBelongsToCountry();
 
 		return description;

@@ -5,7 +5,6 @@ public class Country extends GovernedRegion {
 	private final int countryID;
 	private static int highestID = 0;
 	private String countryName;
-//	private ArrayList<State> states = new ArrayList<>();
 
 	private static int getNextID() {
 		return highestID++;
@@ -29,6 +28,21 @@ public class Country extends GovernedRegion {
 	@Override
 	public int getPopulation() {
 		return super.getPopulation();
+	}
+
+	@Override
+	public void setArea(int area) {
+		super.setArea(area);
+	}
+
+	@Override
+	public void setPopulation(int population) {
+		super.setPopulation(population);
+	}
+
+	@Override
+	public void setFormOfGov(formOfGov formOfGov) {
+		super.setFormOfGov(formOfGov);
 	}
 
 	@Override

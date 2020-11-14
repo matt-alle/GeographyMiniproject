@@ -3,7 +3,8 @@ package geographyMiniproject;
 public abstract class GovernedRegion {
 
 	public enum formOfGov {
-		A, B, C
+		AbsoluteMonarchy, Communist, Constitutional, Democracy, DemocraticRepublic, Dictatorship, Federation, Monarchy,
+		Republic
 	};
 
 	private int area;

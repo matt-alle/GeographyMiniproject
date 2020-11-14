@@ -1,5 +1,7 @@
 package geographyMiniproject;
 
+import javafx.geometry.Insets;
+
 //import java.awt.TextArea;
 
 import javafx.scene.Scene;
@@ -22,7 +24,7 @@ public class GeoView {
 	Label stateLabel = new Label("State");
 	Label countryLabel = new Label("Country");
 	Label populationLabel = new Label("Population");
-	Label areaLabel = new Label("Area");
+	Label areaLabel = new Label("Area in km" + '\u00B2');
 	Label formOfGovLabel = new Label("Form of Government");
 
 	TextField countryTF = new TextField();
@@ -37,7 +39,8 @@ public class GeoView {
 	Button addStateButton = new Button("Add State to Country");
 	Button deleteCountryButton = new Button("Delete Country");
 	Button deleteStateButton = new Button("Delete State");
-	Button updateButton = new Button("Update"); // not sure if needed
+	Button updateCountryButton = new Button("Update Country");
+	Button updateStateButton = new Button("Update State");
 
 	ComboBox<String> countryBox = new ComboBox<>();
 	ComboBox<String> stateBox = new ComboBox<>();
@@ -48,13 +51,13 @@ public class GeoView {
 		this.model = model;
 
 		VBox root = new VBox();
-		root.setSpacing(20);
+		root.setId("rootStyle");
+		root.setSpacing(15);
 		root.getChildren().add(dataEntry());
-		root.getChildren().add(buttonArea());
 		root.getChildren().add(dataSelection());
+		root.getChildren().add(buttonArea());
 		root.getChildren().add(displayArea());
 
-		// Standard stuff for Scene and Stage
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("GeoStyle.css").toExternalForm());
 		stage.setTitle("Geography Project");
@@ -64,29 +67,47 @@ public class GeoView {
 
 	private HBox dataSelection() {
 		HBox hBox = new HBox();
-		hBox.setSpacing(50);
+		// hBox.setSpacing(50);
 		countryBox.setPrefSize(150, 25);
 		stateBox.setPrefSize(150, 25);
+		HBox.setMargin(countryBox, new Insets(10, 20, 0, 40));
+		HBox.setMargin(stateBox, new Insets(10, 20, 0, 40));
+	//	countryBox.setValue("Select Country");
+		countryBox.getSelectionModel().selectFirst();
+	//	stateBox.setValue("Select State");
+		stateBox.getSelectionModel().selectFirst();
 		hBox.getChildren().addAll(countryBox, stateBox);
 		return hBox;
 	}
 
 	private Pane dataEntry() {
 		GridPane pane = new GridPane();
+		GridPane.setMargin(countryLabel, new Insets(10, 5, 0, 10));
+		GridPane.setMargin(stateLabel, new Insets(10, 5, 0, 5));
+		GridPane.setMargin(populationLabel, new Insets(10, 5, 0, 10));
+		GridPane.setMargin(areaLabel, new Insets(10, 5, 0, 5));
+		GridPane.setMargin(formOfGovLabel, new Insets(10, 5, 0, 5));
+		stateLabel.setId("stateLabel");
+		countryLabel.setId("countryLabel");
+		GridPane.setMargin(countryTF, new Insets(0, 5, 0, 5));
+		GridPane.setMargin(saveButton, new Insets(0, 5, 0, 5));
+		GridPane.setMargin(populationTF, new Insets(0, 5, 0, 5));
 		pane.setHgap(30);
-		pane.setVgap(10);
-		formOfGovBox.setPrefSize(130, 25);
+		pane.setVgap(5);
+		formOfGovBox.setPrefSize(180, 25);
 		pane.add(countryLabel, 0, 0);
 		pane.add(countryTF, 0, 1);
 		pane.add(stateLabel, 2, 0);
 		pane.add(stateTF, 2, 1);
-		pane.add(populationLabel, 0, 2);
-		pane.add(populationTF, 0, 3);
-		pane.add(areaLabel, 1, 2);
-		pane.add(areaTF, 1, 3);
-		pane.add(formOfGovLabel, 2, 2);
+		pane.add(saveButton, 0, 2);
+		pane.add(addStateButton, 2, 2);
+		pane.add(populationLabel, 0, 3);
+		pane.add(populationTF, 0, 4);
+		pane.add(areaLabel, 1, 3);
+		pane.add(areaTF, 1, 4);
+		pane.add(formOfGovLabel, 2, 3);
 		formOfGovBox.getItems().addAll(GovernedRegion.formOfGov.values());
-		pane.add(formOfGovBox, 2, 3);
+		pane.add(formOfGovBox, 2, 4);
 		return pane;
 	}
 
@@ -96,9 +117,13 @@ public class GeoView {
 		deleteCountryButton.setPrefSize(130, 25);
 		addStateButton.setPrefSize(130, 25);
 		deleteStateButton.setPrefSize(130, 25);
-		updateButton.setPrefSize(130, 25);
-		hBox.setSpacing(10);
-		hBox.getChildren().addAll(saveButton, deleteCountryButton, addStateButton, deleteStateButton, updateButton);
+		updateCountryButton.setPrefSize(130, 25);
+		updateStateButton.setPrefSize(130, 25);
+		HBox.setMargin(updateCountryButton, new Insets(5, 5, 0, 30));
+		HBox.setMargin(deleteCountryButton, new Insets(5, 20, 0, 25));
+		HBox.setMargin(updateStateButton, new Insets(5, 5, 0, 30));
+		HBox.setMargin(deleteStateButton, new Insets(5, 20, 0, 20));
+		hBox.getChildren().addAll(updateCountryButton, deleteCountryButton, updateStateButton, deleteStateButton);
 		return hBox;
 	}
 
