@@ -8,7 +8,9 @@ Matthias Allemann / Roger Dörflinger
 ----------------------------------------
 
 Create Country: Enter Country Name, Population, Area, Form of Government -> save
+
 Create/add State: Select Country which shall get the new State - Enter State Name, Population, Area, Form of Government -> save
+
 
 Additional Functionality:
 
